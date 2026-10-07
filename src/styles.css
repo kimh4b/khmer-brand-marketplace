@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;800&family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+:root {
+  --paper: #EFEEE9;
+  --ink: #16181B;
+  --accent: #2D4FFF;
+  --line: #D8D5CD;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, .display {
+  font-family: 'Archivo', sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}

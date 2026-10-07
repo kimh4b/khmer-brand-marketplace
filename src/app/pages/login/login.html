@@ -1,0 +1,27 @@
+<div class="max-w-sm mx-auto px-6 py-20">
+  <h1 class="display text-2xl mb-8">Log in</h1>
+
+  <form (ngSubmit)="onSubmit()" class="space-y-5">
+    <div>
+      <label class="block text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">Email</label>
+      <input [(ngModel)]="email" name="email" placeholder="you@example.com" class="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]" />
+    </div>
+
+    <div>
+      <label class="block text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">Password</label>
+      <input [(ngModel)]="password" name="password" type="password" placeholder="••••••••" class="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]" />
+    </div>
+
+    <button type="submit" class="w-full bg-[var(--ink)] text-[var(--paper)] py-2.5 text-sm font-medium hover:bg-[var(--accent)] transition">
+      Log in
+    </button>
+
+    @if (errorMessage) {
+      <p class="text-sm text-red-600">{{ errorMessage }}</p>
+    }
+  </form>
+
+  <p class="text-sm text-[var(--ink)]/50 mt-6">
+    No account? <a routerLink="/signup" class="text-[var(--accent)] hover:underline">Sign up</a>
+  </p>
+</div>

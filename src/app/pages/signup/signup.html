@@ -1,0 +1,40 @@
+<div class="max-w-sm mx-auto px-6 py-20">
+  <h1 class="display text-2xl mb-8">Sign up</h1>
+
+  <form (ngSubmit)="onSubmit()" class="space-y-5">
+    <div>
+      <label class="block text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">Name</label>
+      <input [(ngModel)]="name" name="name" placeholder="Your name" class="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]" />
+    </div>
+
+    <div>
+      <label class="block text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">Email</label>
+      <input [(ngModel)]="email" name="email" placeholder="you@example.com" class="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]" />
+    </div>
+
+    <div>
+      <label class="block text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">Password</label>
+      <input [(ngModel)]="password" name="password" type="password" placeholder="••••••••" class="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]" />
+    </div>
+
+    <div>
+      <label class="block text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">I am a</label>
+      <select [(ngModel)]="role" name="role" class="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]">
+        <option value="buyer">Buyer</option>
+        <option value="seller">Seller</option>
+      </select>
+    </div>
+
+    <button type="submit" class="w-full bg-[var(--ink)] text-[var(--paper)] py-2.5 text-sm font-medium hover:bg-[var(--accent)] transition">
+      Create account
+    </button>
+
+    @if (errorMessage) {
+      <p class="text-sm text-red-600">{{ errorMessage }}</p>
+    }
+  </form>
+
+  <p class="text-sm text-[var(--ink)]/50 mt-6">
+    Already have an account? <a routerLink="/login" class="text-[var(--accent)] hover:underline">Log in</a>
+  </p>
+</div>

@@ -1,0 +1,20 @@
+<div class="max-w-6xl mx-auto px-6 py-10">
+  <h1 class="display text-3xl mb-8">Shop local brands</h1>
+
+  <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-px bg-[var(--line)] border border-[var(--line)]">
+    @for (product of products(); track product.id) {
+      <a [routerLink]="['/product', product.id]" class="bg-[var(--paper)] p-4 hover:bg-white transition group">
+        <div class="aspect-square bg-[var(--line)]/30 mb-3 flex items-center justify-center text-xs text-[var(--ink)]/30">
+          @if (product.photo_url) {
+            <img [src]="product.photo_url" class="w-full h-full object-cover" />
+          } @else {
+            No image
+          }
+        </div>
+        <p class="text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">{{ product.brands.name }}</p>
+        <p class="text-sm font-medium leading-tight mb-1 group-hover:text-[var(--accent)]">{{ product.name }}</p>
+        <p class="text-sm">${{ product.price }}</p>
+      </a>
+    }
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="max-w-sm mx-auto px-6 py-16">
+  <h1 class="display text-2xl mb-8">Profile</h1>
+
+  <form (ngSubmit)="onSave()" class="space-y-5">
+    <div>
+      <label class="block text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">Name</label>
+      <input [(ngModel)]="name" name="name" class="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]" />
+    </div>
+    <div>
+      <label class="block text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">Email</label>
+      <input [(ngModel)]="email" name="email" class="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]" />
+    </div>
+    <div>
+      <p class="text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">Role</p>
+      <p class="text-sm capitalize text-[var(--ink)]/70">{{ auth.currentUser().role }}</p>
+    </div>
+
+    <button type="submit" class="w-full bg-[var(--ink)] text-[var(--paper)] py-2.5 text-sm font-medium hover:bg-[var(--accent)] transition">
+      Save changes
+    </button>
+
+    @if (successMessage) {
+      <p class="text-sm text-green-600">{{ successMessage }}</p>
+    }
+    @if (errorMessage) {
+      <p class="text-sm text-red-600">{{ errorMessage }}</p>
+    }
+  </form>
+</div>

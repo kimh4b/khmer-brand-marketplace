@@ -1,0 +1,57 @@
+@if (product()) {
+  <div class="max-w-4xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-2 gap-12">
+
+    <div class="aspect-square bg-[var(--line)]/20 flex items-center justify-center">
+      @if (product().photo_url) {
+        <img [src]="product().photo_url" class="w-full h-full object-cover" />
+      } @else {
+        <span class="text-xs text-[var(--ink)]/30">No image</span>
+      }
+    </div>
+
+    <div>
+      <p class="text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-2">{{ product().brands.name }}</p>
+      <h1 class="display text-3xl mb-3">{{ product().name }}</h1>
+      <p class="text-xl mb-6">${{ product().price }}</p>
+
+      <div class="flex gap-4 text-sm text-[var(--ink)]/60 mb-6">
+        <span>Size {{ product().size }}</span>
+        <span>·</span>
+        <span>{{ product().category }}</span>
+      </div>
+
+      <p class="text-sm text-[var(--ink)]/70 leading-relaxed mb-8">{{ product().description }}</p>
+
+      <div class="flex items-center gap-3 mb-4">
+        <label for="quantity" class="text-xs uppercase tracking-wide text-[var(--ink)]/50">Qty</label>
+        <input [(ngModel)]="quantity" name="quantity" id="quantity" type="number" class="w-16 border border-[var(--line)] bg-white px-2 py-1.5 text-sm focus:outline-none focus:border-[var(--accent)]" />
+      </div>
+
+      <button (click)="onOrder()" class="w-full bg-[var(--ink)] text-[var(--paper)] py-3 text-sm font-medium hover:bg-[var(--accent)] transition">
+        Place order
+      </button>
+
+      @if (successMessage()) {
+        <p class="text-sm text-green-600 mt-3">{{ successMessage() }}</p>
+      }
+      @if (errorMessage()) {
+        <p class="text-sm text-red-600 mt-3">{{ errorMessage() }}</p>
+      }
+
+      <div class="mt-12 pt-8 border-t border-[var(--line)]">
+        <h3 class="text-sm font-medium uppercase tracking-wide text-[var(--ink)]/50 mb-4">Reviews</h3>
+        @if (reviews().length === 0) {
+          <p class="text-sm text-[var(--ink)]/40">No reviews yet.</p>
+        }
+        @for (review of reviews(); track review.id) {
+          <div class="mb-4">
+            <p class="text-sm font-medium">{{ review.users.name }} · {{ review.rating }}/5</p>
+            <p class="text-sm text-[var(--ink)]/70">{{ review.comment }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+} @else {
+  <p class="px-6 py-14 text-sm text-[var(--ink)]/50">Loading...</p>
+}

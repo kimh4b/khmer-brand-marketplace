@@ -1,0 +1,58 @@
+@if (loading()) {
+  <p class="max-w-md mx-auto px-6 py-14 text-sm text-[var(--ink)]/50"></p>
+}@else if (hasBrand()) {
+  <div class="max-w-md mx-auto px-6 py-14">
+  <h1 class="display text-2xl mb-2">Edit your brand</h1>
+  <p class="text-sm text-[var(--ink)]/50 mb-8">You already have a brand — Edit its details below</p>
+
+  <form (ngSubmit)="onUpdate()" class="space-y-5">
+    <div>
+      <label class="block text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">Name</label>
+      <input [(ngModel)]="name" name="name" class="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]" />
+    </div>
+    <div>
+      <label class="block text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">Logo URL</label>
+      <input [(ngModel)]="logo" name="logo" class="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]" />
+    </div>
+    <div>
+      <label class="block text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">Description</label>
+      <input [(ngModel)]="description" name="description" class="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]" />
+    </div>
+    <button type="submit" class="w-full bg-[var(--ink)] text-[var(--paper)] py-2.5 text-sm font-medium hover:bg-[var(--accent)] transition">
+      Save changes
+    </button>
+    @if (errorMessage) {
+      <p class="text-sm text-red-600">{{ errorMessage }}</p>
+    }
+  </form>
+</div>
+} @else {
+  <div class="max-w-md mx-auto px-6 py-14">
+    <h1 class="display text-2xl mb-8">Create your brand</h1>
+
+    <form (ngSubmit)="onSubmit()" class="space-y-5">
+      <div>
+        <label class="block text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">Name</label>
+        <input [(ngModel)]="name" name="name" placeholder="Brand name" class="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]" />
+      </div>
+
+      <div>
+        <label class="block text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">Logo URL</label>
+        <input [(ngModel)]="logo" name="logo" placeholder="https://..." class="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]" />
+      </div>
+
+      <div>
+        <label class="block text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">Description</label>
+        <input [(ngModel)]="description" name="description" placeholder="What do you make?" class="w-full border border-[var(--line)] bg-white px-3 py-2 text-sm focus:outline-none focus:border-[var(--accent)]" />
+      </div>
+
+      <button type="submit" class="w-full bg-[var(--ink)] text-[var(--paper)] py-2.5 text-sm font-medium hover:bg-[var(--accent)] transition">
+        Create brand
+      </button>
+
+      @if (errorMessage) {
+        <p class="text-sm text-red-600">{{ errorMessage }}</p>
+      }
+    </form>
+  </div>
+}

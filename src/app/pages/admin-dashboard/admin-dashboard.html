@@ -1,0 +1,33 @@
+<div class="max-w-3xl mx-auto px-6 py-14">
+  <h1 class="display text-2xl mb-8">Brand approvals</h1>
+
+  <div class="divide-y divide-[var(--line)] border-t border-[var(--line)]">
+    @for (brand of allBrands(); track brand.id) {
+      <div class="flex items-center justify-between py-4">
+        <div>
+          <p class="text-sm font-medium">{{ brand.name }}</p>
+          <span
+            class="text-[11px] uppercase tracking-wide"
+            [class.text-amber-600]="brand.status === 'pending'"
+            [class.text-green-600]="brand.status === 'approved'"
+            [class.text-red-600]="brand.status === 'rejected'"
+          >
+            {{ brand.status }}
+          </span>
+        </div>
+        <div class="flex gap-2">
+          @if (brand.status !== 'approved') {
+            <button (click)="onUpdateStatus(brand, 'approved')" class="text-xs font-medium border border-[var(--ink)] px-3 py-1.5 hover:bg-[var(--ink)] hover:text-[var(--paper)] transition">
+              Approve
+            </button>
+          }
+          @if (brand.status !== 'rejected') {
+            <button (click)="onUpdateStatus(brand, 'rejected')" class="text-xs font-medium border border-[var(--line)] text-[var(--ink)]/60 px-3 py-1.5 hover:border-red-300 hover:text-red-600 transition">
+              Reject
+            </button>
+          }
+        </div>
+      </div>
+    }
+  </div>
+</div>
