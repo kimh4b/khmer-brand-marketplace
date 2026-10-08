@@ -2,21 +2,21 @@
   <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
     <a routerLink="/" class="display text-xl">KhmerLocal</a>
 
-    @if (auth.currentUser()) {
+    @if (auth.currentUser(); as user) {
       <div class="flex items-center gap-5 text-sm">
-        @if (auth.currentUser().role === 'seller') {
+        @if (user.role === 'seller') {
           <a routerLink="/seller-dashboard" class="hover:text-[var(--accent)]">Dashboard</a>
           <a routerLink="/create-brand" class="hover:text-[var(--accent)]">Brand</a>
           <a routerLink="/add-product" class="hover:text-[var(--accent)]">Add product</a>
-          <a routerLink="/profile" class="hover:text-[var(--accent)]">{{ auth.currentUser().name }}</a>
+          <a routerLink="/profile" class="hover:text-[var(--accent)]">{{ user.name }}</a>
         }
-        @if (auth.currentUser().role === 'buyer') {
+        @if (user.role === 'buyer') {
           <a routerLink="/my-orders" class="hover:text-[var(--accent)]">My orders</a>
-          <a routerLink="/profile" class="hover:text-[var(--accent)]">{{ auth.currentUser().name }}</a>
+          <a routerLink="/profile" class="hover:text-[var(--accent)]">{{ user.name }}</a>
         }
-        @if (auth.currentUser().role === 'admin') {
+        @if (user.role === 'admin') {
           <a routerLink="/admin-dashboard" class="hover:text-[var(--accent)]">Admin</a>
-          <a routerLink="/profile" class="hover:text-[var(--accent)]">{{ auth.currentUser().name }}</a>
+          <a routerLink="/profile" class="hover:text-[var(--accent)]">{{ user.name }}</a>
         }
         <button (click)="logout()" class="border border-[var(--ink)] px-3 py-1.5 text-xs font-medium hover:bg-[var(--ink)] hover:text-[var(--paper)] transition">
           Log out
@@ -26,7 +26,6 @@
       <div class="flex items-center gap-3 text-sm">
         <a routerLink="/login" class="hover:text-[var(--accent)]">Log in</a>
         <a routerLink="/signup" class="border border-[var(--ink)] px-3 py-1.5 text-xs font-medium hover:bg-[var(--ink)] hover:text-[var(--paper)] transition">Sign up</a>
-        
       </div>
     }
   </div>

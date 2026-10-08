@@ -12,7 +12,7 @@
     </div>
     <div>
       <p class="text-xs uppercase tracking-wide text-[var(--ink)]/50 mb-1">Role</p>
-      <p class="text-sm capitalize text-[var(--ink)]/70">{{ auth.currentUser().role }}</p>
+      <p class="text-sm capitalize text-[var(--ink)]/70">{{ auth.currentUser()?.role }}</p>
     </div>
 
     <button type="submit" class="w-full bg-[var(--ink)] text-[var(--paper)] py-2.5 text-sm font-medium hover:bg-[var(--accent)] transition">

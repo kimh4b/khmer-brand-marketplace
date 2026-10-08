@@ -41,6 +41,7 @@ export class ProductDetail implements OnInit {
 
   async onOrder() {
     const user = this.auth.currentUser();
+    if (!user) return;
     const { data, error } = await this.supabaseService.createOrder(
       user.id,
       this.product().brand_id,

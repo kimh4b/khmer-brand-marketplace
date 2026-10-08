@@ -2,11 +2,11 @@ import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Supabase } from '../../supabase';
 import { Auth } from '../../auth';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-brand',
-  imports: [FormsModule, RouterLink],
+  imports: [FormsModule],
   templateUrl: './create-brand.html',
   styleUrl: './create-brand.css',
 })
@@ -27,6 +27,7 @@ export class CreateBrand implements OnInit {
 
   async ngOnInit() {
     const user = this.auth.currentUser();
+    if (!user) return;
     const { data, error } = await this.supabaseService.getBrandByOwner(user.id);
     if (data && data.length > 0) {
       this.hasBrand.set(true);
@@ -40,6 +41,7 @@ export class CreateBrand implements OnInit {
 
   async onSubmit() {
     const user = this.auth.currentUser();
+    if (!user) return;
     const { data, error } = await this.supabaseService.createBrand(
       user.id,
       this.name,

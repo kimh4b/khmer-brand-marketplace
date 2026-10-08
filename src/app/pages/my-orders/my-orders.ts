@@ -21,7 +21,7 @@ export class MyOrders implements OnInit {
 
   async ngOnInit() {
     const user = this.auth.currentUser();
-
+    if (!user) return;
     const { data } = await this.supabaseService.getOrdersByBuyer(user.id);
     if (data) {
       this.orders.set(data);
@@ -42,6 +42,7 @@ export class MyOrders implements OnInit {
 
   async onReview(order: any, rating: number, comment: string) {
     const user = this.auth.currentUser();
+    if (!user) return;
     const { data } = await this.supabaseService.createReview(
       user.id,
       order.brand_id,

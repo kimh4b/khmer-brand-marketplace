@@ -25,6 +25,7 @@ export class SellerDashboard implements OnInit {
 
   async ngOnInit() {
     const user = this.auth.currentUser();
+    if (!user) return;
     const { data, error } = await this.supabaseService.getBrandByOwner(user.id);
 
     if (data && data.length > 0) {

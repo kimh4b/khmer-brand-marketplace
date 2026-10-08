@@ -1,27 +1,27 @@
 import { Injectable, signal } from '@angular/core';
+import { User } from './models/user.model';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root',
 })
 export class Auth {
-currentUser = signal<any>(null);
+  currentUser = signal<User | null>(null);
 
-constructor(){
+  constructor() {
     const saved = localStorage.getItem('user');
-    if(saved){
-        const user = JSON.parse(saved);
-        this.currentUser.set(user);
+    if (saved) {
+      const user: User = JSON.parse(saved);
+      this.currentUser.set(user);
     }
-}
+  }
 
-setUser(user: any){
+  setUser(user: User) {
     this.currentUser.set(user);
-    localStorage.setItem('user', JSON.stringify(user))
-    
-}
+    localStorage.setItem('user', JSON.stringify(user));
+  }
 
-logout(){
+  logout() {
     this.currentUser.set(null);
     localStorage.removeItem('user');
-}
+  }
 }
