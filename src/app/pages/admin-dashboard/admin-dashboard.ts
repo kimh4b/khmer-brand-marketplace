@@ -1,6 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Supabase } from '../../supabase';
 import { Auth } from '../../auth';
+import { Brand } from '../../models/brand.model';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -9,7 +10,7 @@ import { Auth } from '../../auth';
   styleUrl: './admin-dashboard.css',
 })
 export class AdminDashboard implements OnInit {
-  allBrands = signal<any[]>([]);
+  allBrands = signal<Brand[]>([]);
 
   constructor(
     private supabaseService: Supabase,
@@ -23,7 +24,7 @@ export class AdminDashboard implements OnInit {
     }
   }
 
-  async onUpdateStatus(brand: any, status: string) {
+  async onUpdateStatus(brand: Brand, status: string) {
     const { error } = await this.supabaseService.updateBrandStatus(brand.id, status);
     if (!error) {
       this.allBrands.update((brands) =>

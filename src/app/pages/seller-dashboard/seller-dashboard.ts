@@ -3,6 +3,9 @@ import { FormsModule } from '@angular/forms';
 import { Supabase } from '../../supabase';
 import { Auth } from '../../auth';
 import { Router, RouterLink } from '@angular/router';
+import { Brand } from '../../models/brand.model';
+import { Product } from '../../models/product.model';
+import { Order, OrderStatus} from '../../models/order.model';
 
 
 @Component({
@@ -12,9 +15,9 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './seller-dashboard.css',
 })
 export class SellerDashboard implements OnInit {
-  brand = signal<any>(null);
-  products = signal<any[]>([]);
-  orders = signal<any[]>([]);
+  brand = signal<Brand | null>(null);
+  products = signal<Product[]>([]);
+  orders = signal<Order[]>([]);
   hasNoBrand = signal(false);
 
   constructor(
@@ -47,13 +50,13 @@ export class SellerDashboard implements OnInit {
     }
   }
 
-  getOrderTotal(order: any): number {
+  getOrderTotal(order: Order): number {
     return order.order_items.reduce((sum: number, item: any) => {
       return sum + item.quantity * item.products.price;
     }, 0);
   }
 
-  async onUpdateStatus(order: any, newStatus: string) {
+  async onUpdateStatus(order: Order, newStatus: OrderStatus) {
   const { error } = await this.supabaseService.updateOrderStatus(order.id, newStatus);
 
   if (!error) {

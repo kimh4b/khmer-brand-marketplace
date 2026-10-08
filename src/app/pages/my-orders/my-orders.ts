@@ -2,6 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { Supabase } from '../../supabase';
 import { Auth } from '../../auth';
 import { Router } from '@angular/router';
+import { Order } from '../../models/order.model';
 
 @Component({
   selector: 'app-my-orders',
@@ -10,8 +11,8 @@ import { Router } from '@angular/router';
   styleUrl: './my-orders.css',
 })
 export class MyOrders implements OnInit {
-  orders = signal<any[]>([]);
-  myReviews = signal<any[]>([]);
+  orders = signal<Order[]>([]);
+  myReviews = signal<{ brand_id: string}[]>([]);
 
   constructor(
     private supabaseService: Supabase,
@@ -40,7 +41,7 @@ export class MyOrders implements OnInit {
     return this.myReviews().some(r => r.brand_id === brandId);
   }
 
-  async onReview(order: any, rating: number, comment: string) {
+  async onReview(order: Order, rating: number, comment: string) {
     const user = this.auth.currentUser();
     if (!user) return;
     const { data } = await this.supabaseService.createReview(
