@@ -6,4 +6,9 @@ export interface Product {
   name: string;
   price: number;
   stock_status: StockStatus;
+  photo_url: string;
+  size: string;
+  category: string;
+  description: string;
+  brands?: { name: string; status: string };
 }

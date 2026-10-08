@@ -3,4 +3,6 @@ export interface Brand {
   name: string;
   owner_id: string;
   status: string;
+  logo: string;
+  description: string;
 }

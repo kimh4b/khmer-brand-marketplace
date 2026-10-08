@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { Supabase } from '../../supabase';
 import { Auth } from '../../auth';
 import { Router } from '@angular/router';
+import { Brand } from '../../models/brand.model';
 
 @Component({
   selector: 'app-create-brand',
@@ -17,7 +18,7 @@ export class CreateBrand implements OnInit {
   errorMessage = '';
   loading = signal(true);
   hasBrand = signal(false);
-  existingBrand = signal<any>(null);
+  existingBrand = signal<Brand | null>(null);
 
   constructor(
     private supabaseService: Supabase,
@@ -56,8 +57,10 @@ export class CreateBrand implements OnInit {
   }
 
   async onUpdate() {
+    const existingBrand = this.existingBrand();
+    if (!existingBrand) return;
     const { data, error } = await this.supabaseService.updateBrand(
-      this.existingBrand().id,
+      existingBrand.id,
       this.name,
       this.logo,
       this.description,

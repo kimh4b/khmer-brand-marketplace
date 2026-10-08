@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Supabase } from '../../supabase';
 import { Auth } from '../../auth';
 import { FormsModule } from '@angular/forms';
+import { Product } from '../../models/product.model';
+import { Review } from '../../models/review.model';
 
 @Component({
   selector: 'app-product-detail',
@@ -11,11 +13,11 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './product-detail.css',
 })
 export class ProductDetail implements OnInit {
-  product = signal<any>(null);
+  product = signal<Product | null>(null);
   quantity = 1;
   errorMessage = signal('');
   successMessage = signal('');
-  reviews = signal<any[]>([]);
+  reviews = signal<Review[]>([]);
 
   constructor(
     private route: ActivatedRoute,
@@ -42,15 +44,18 @@ export class ProductDetail implements OnInit {
   async onOrder() {
     const user = this.auth.currentUser();
     if (!user) return;
+    const product = this.product();
+if (!product) return;
     const { data, error } = await this.supabaseService.createOrder(
       user.id,
-      this.product().brand_id,
+      product.brand_id,
     );
     if (data) {
       const newOrderId = data[0].id;
+      
       const { data: itemData, error: itemError } = await this.supabaseService.createOrderItem(
         newOrderId,
-        this.product().id,
+        product.id,
         this.quantity,
       );
       if (itemData) {

@@ -1,6 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Supabase } from '../../supabase';
 import { RouterLink } from '@angular/router';
+import { Product } from '../../models/product.model';
 
 @Component({
   selector: 'app-browse',
@@ -10,7 +11,7 @@ import { RouterLink } from '@angular/router';
 })
 export class Browse implements OnInit{
 
-    products = signal<any[]>([]);
+    products = signal<Product[]>([]);
 
     constructor(private supabaseService: Supabase){}
 

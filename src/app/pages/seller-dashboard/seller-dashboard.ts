@@ -51,9 +51,8 @@ export class SellerDashboard implements OnInit {
   }
 
   getOrderTotal(order: Order): number {
-    return order.order_items.reduce((sum: number, item: any) => {
-      return sum + item.quantity * item.products.price;
-    }, 0);
+    return order.order_items.reduce(
+      (sum, item) => sum + item.quantity * item.products.price, 0);
   }
 
   async onUpdateStatus(order: Order, newStatus: OrderStatus) {
